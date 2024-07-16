@@ -6,26 +6,45 @@
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:20:45 by abouafso          #+#    #+#             */
-/*   Updated: 2024/07/16 04:48:12 by abouafso         ###   ########.fr       */
+/*   Updated: 2024/07/16 09:26:47 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int is_digit(char **str)
+int	is_number(int c)
 {
-	int i = 1;
-	int j = 0;
+	return ((c >= '0' && c <= '9') || c == ' ');
+}
 
-	while (str[i])
+int	is_num(char c)
+{
+	if (!c)
+		return (0);
+	return (c >= '0' && c <= '9');
+}
+
+int	is_alpha(char **av)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (av[i])
 	{
-		while (str[i][j])
+		j = 0;
+		while (av[i][j])
 		{
-			if (!(str[i][j] >= '0' && str[i][j] <= '9'))
+			if (av[i][j + 1] &&
+				av[i][j] == '+'&& is_num(av[i][j + 1]))
+			{
+				j++;
+				continue ;
+			}
+			else if (!is_number(av[i][j]))
 				return (1);
 			j++;
 		}
-		j = 0;
 		i++;
 	}
 	return (0);
@@ -73,7 +92,7 @@ int main(int ac, char **av)
 		printf("ERROR : INVALID NUMBER OF ARGUMENTS!\n");
 		return (1);
 	}
-	if (is_digit(av) || is_empty(av))
+	if (is_alpha(av) || is_empty(av))
 	{
 		return (printf("Error\n"));
 	}
