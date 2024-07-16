@@ -6,7 +6,7 @@
 #    By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/14 19:16:42 by abouafso          #+#    #+#              #
-#    Updated: 2024/07/14 19:45:52 by abouafso         ###   ########.fr        #
+#    Updated: 2024/07/16 03:40:53 by abouafso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-SRC = philo.c
+SRC = philo.c parsing.c ft_split.c
 
 OBJ = $(SRC:.c=.o)
 

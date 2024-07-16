@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   test .c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:20:45 by abouafso          #+#    #+#             */
-/*   Updated: 2024/07/16 04:48:12 by abouafso         ###   ########.fr       */
+/*   Updated: 2024/07/16 04:36:50 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,24 @@ int is_empty(char **av)
 int split_args(int ac, char **av, t_philo *philo)
 {
 	(void) ac;
+	char **splited;
+	int i = 0;
 
-	philo->philo = ft_atoi(av[1]);
-	philo->time_to_die = ft_atoi(av[2]);
-	philo->time_to_eat = ft_atoi(av[3]);
-	philo->time_to_sleep = ft_atoi(av[4]);
-	if(av[5])
-		philo->nb_time_to_eat = ft_atoi(av[5]);
+	splited = ft_split(*av, ' ');
+	if (!splited)
+		return (1);
+	philo->philo = ft_atoi(av[0]);
+	philo->time_to_die = ft_atoi(av[1]);
+	philo->time_to_eat = ft_atoi(av[2]);
+	philo->time_to_sleep = ft_atoi(av[3]);
+	if(av[4])
+		philo->nb_time_to_eat = ft_atoi(av[4]);
+	while(splited[i])
+	{
+		free(splited[i]);
+		i++;
+	}	
+	free(splited);
 	return (0);
 }
 
@@ -66,7 +77,7 @@ void f() { system("leaks philo"); }
 int main(int ac, char **av)
 {
 	t_philo philo;
-	// atexit(f);
+	atexit(f);
 
 	if (ac < 5 || ac > 6)
 	{
@@ -77,10 +88,5 @@ int main(int ac, char **av)
 	{
 		return (printf("Error\n"));
 	}
-	split_args(ac, av, &philo);
-		printf("%d\n", philo.philo);
-	printf("%d\n", philo.time_to_die);
-	printf("%d\n", philo.time_to_eat);
-	printf("%d\n", philo.time_to_sleep);
-	// printf("%d\n", philo.nb_time_to_eat);
+	split_args(ac, ++av, &philo);
 }
